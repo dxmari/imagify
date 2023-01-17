@@ -1,0 +1,21 @@
+{
+  "name": "imagify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mariselvam",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "compress-images": "^2.0.5",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-easy-zip": "^1.1.5",
+    "express-fileupload": "^1.4.0",
+    "webp-converter": "^2.3.3"
+  }
+}
