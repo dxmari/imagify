@@ -69,7 +69,7 @@ app.post('/api/compress', async (req, res) => {
         // fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
       }
       console.log('6');
-      res.json({ url: `/api/download?name=${fpath}` });
+      res.json({ url: `/imagify/api/download?name=${fpath}` });
     } catch (error) {
       console.log('7');
       console.log('error', error);
