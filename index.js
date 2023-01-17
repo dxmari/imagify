@@ -46,25 +46,33 @@ app.post('/api/compress', async (req, res) => {
     try {
       const fpath = Date.now();
       const dirPath = path.resolve(__dirname, `outputs/${fpath}`);
+      console.log('1', dirPath);
       fs.mkdirSync(dirPath);
+      console.log('2');
       for (const key in req.files.images) {
         const file = req.files.images[key];
         const ext = path.extname(file.name).replace('.', '');
+        console.log('3');
         let quality = 30;
         if (file.size < 200000) {
           quality = 60;
         }
+        console.log('4');
         const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
+        console.log('5');
         fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
       }
+      console.log('6');
       res.json({ url: `/api/download?name=${fpath}` });
     } catch (error) {
+      console.log('7');
       console.log('error', error);
       res.status(400).json({
         message: "Something went wrong...!!"
       })
     }
   } else {
+    console.log('8');
     res.status(400).json({
       message: "Something went wrong...!!"
     })
