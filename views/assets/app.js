@@ -118,7 +118,7 @@ jQuery(document).ready(function ($) {
     }
     $('#convert').attr('disabled', true);
     $.ajax({
-      "url": "http://localhost:4007/api/compress",
+      "url": "/api/compress",
       "method": "POST",
       "timeout": 0,
       "processData": false,
