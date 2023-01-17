@@ -39,7 +39,6 @@ app.get('/api/health', (req, res) => {
 })
 
 app.post('/api/compress', async (req, res) => {
-  console.log('req.files', req.files);
   if (req.files && req.files.images) {
     if (!Array.isArray(req.files.images)) {
       req.files.images = [req.files.images]
