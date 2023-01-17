@@ -46,7 +46,7 @@ app.post('/api/compress', async (req, res) => {
     try {
       const fpath = Date.now();
       const dirPath = path.resolve(__dirname, `outputs/${fpath}`);
-      console.log('1', dirPath);
+      console.log('1');
       fs.mkdirSync(dirPath);
       console.log('2');
       for (const key in req.files.images) {
@@ -63,22 +63,24 @@ app.post('/api/compress', async (req, res) => {
         // }).catch(err => {
         //   console.log('err', err)
         // });
-        // const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
-        const result = {};
+        const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
+        // const result = {};
         console.log('5');
-        // fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
+        fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
+        console.log('6');
       }
-      console.log('6');
-      res.json({ url: `/imagify/api/download?name=${fpath}` });
-    } catch (error) {
       console.log('7');
+      res.json({ url: `/imagify/api/download?name=${fpath}` });
+      console.log('8');
+    } catch (error) {
+      console.log('9');
       console.log('error', error);
       res.status(400).json({
         message: "Something went wrong...!!"
       })
     }
   } else {
-    console.log('8');
+    console.log('10');
     res.status(400).json({
       message: "Something went wrong...!!"
     })
