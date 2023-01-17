@@ -118,7 +118,7 @@ jQuery(document).ready(function ($) {
     }
     $('#convert').attr('disabled', true);
     $.ajax({
-      "url": "/api/compress",
+      "url": "/imagify/api/compress",
       "method": "POST",
       "timeout": 0,
       "processData": false,
