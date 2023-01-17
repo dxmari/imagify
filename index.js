@@ -58,11 +58,11 @@ app.post('/api/compress', async (req, res) => {
           quality = 60;
         }
         console.log('4');
-        webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`).then(resp => {
-          console.log('resp', resp);
-        }).catch(err => {
-          console.log('err', err)
-        });
+        // webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`).then(resp => {
+        //   console.log('resp', resp);
+        // }).catch(err => {
+        //   console.log('err', err)
+        // });
         // const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
         const result = {};
         console.log('5');
