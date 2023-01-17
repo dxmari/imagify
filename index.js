@@ -32,13 +32,13 @@ function initiate() {
   })
 }
 
-app.get('/api/health', (req, res) => {
+app.get('/imagify/api/health', (req, res) => {
   res.json({
     message: "Good"
   })
 })
 
-app.post('/api/compress', async (req, res) => {
+app.post('/imagify/api/compress', async (req, res) => {
   console.log('req.files', req.files);
   if (req.files && req.files.images) {
     if (!Array.isArray(req.files.images)) {
@@ -72,7 +72,7 @@ app.post('/api/compress', async (req, res) => {
   }
 })
 
-app.get('/api/download', async (req, res) => {
+app.get('/imagify/api/download', async (req, res) => {
   const dirPath = path.resolve(__dirname, `outputs/${req.query.name}`);
   const folderFiles = fs.readdirSync(dirPath);
   const files = folderFiles.map(e => ({ path: dirPath + '/' + e, name: e, type: "file" }));
@@ -81,7 +81,7 @@ app.get('/api/download', async (req, res) => {
   fs.rmSync(dirPath, { recursive: true, force: true });
 })
 
-app.get('/', (req, res) => {
+app.get('/imagify', (req, res) => {
   res.render(path.resolve(__dirname, 'views/index'), {});
 })
 
