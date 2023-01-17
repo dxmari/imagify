@@ -58,9 +58,15 @@ app.post('/api/compress', async (req, res) => {
           quality = 60;
         }
         console.log('4');
-        const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
+        webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`).then(resp => {
+          console.log('resp', resp);
+        }).catch(err => {
+          console.log('err', err)
+        });
+        // const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
+        const result = {};
         console.log('5');
-        fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
+        // fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
       }
       console.log('6');
       res.json({ url: `/api/download?name=${fpath}` });
