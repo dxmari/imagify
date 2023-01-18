@@ -1,8 +1,0 @@
-File from: [/Users/dxmari/Documents/Official/Node/imagify/sources/1674035761619/296799.png]
-
-File to: [/Users/dxmari/Documents/Official/Node/imagify/outputs/1674035761619/296799.png]
-
-Compression algorithm: [pngquant]
-
-Description: Error: Command failed: /Users/dxmari/Documents/Official/Node/imagify/node_modules/pngquant-bin/vendor/pngquant --quality=20-30 -o --speed=10 /Users/dxmari/Documents/Official/Node/imagify/outputs/1674035761619/296799.png /Users/dxmari/Documents/Official/Node/imagify/sources/1674035761619/296799.png
-  error: Only one input file is allowed when --output is used. This error also happens when filenames with spaces are not in quotes.
