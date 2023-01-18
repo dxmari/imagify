@@ -16,6 +16,7 @@
     "express": "^4.18.2",
     "express-easy-zip": "^1.1.5",
     "express-fileupload": "^1.4.0",
-    "webp-converter": "^2.3.3"
+    "gifsicle": "^5.2.1",
+    "pngquant-bin": "^6.0.1"
   }
 }

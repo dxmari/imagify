@@ -6,6 +6,7 @@ const { json } = require('body-parser');
 const fileUpload = require('express-fileupload');
 const zip = require('express-easy-zip');
 const webp = require('webp-converter');
+const compress_images = require("compress-images");
 const ejs = require('ejs');
 
 const app = express();
@@ -58,18 +59,60 @@ app.post('/api/compress', async (req, res) => {
           quality = 60;
         }
         console.log('4');
-        // webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`).then(resp => {
-        //   console.log('resp', resp);
-        // }).catch(err => {
-        //   console.log('err', err)
-        // });
         const result = await webp.buffer2webpbuffer(file.data.buffer, ext, `-q ${quality}`);
-        // const result = {};
         console.log('5');
         fs.writeFileSync(`${dirPath}/${file.name.replace(`.${ext}`, '.webp')}`, result);
         console.log('6');
       }
       console.log('7');
+      res.json({ url: `/imagify/api/download?name=${fpath}` });
+      console.log('8');
+    } catch (error) {
+      console.log('9');
+      console.log('error', error);
+      res.status(400).json({
+        message: "Something went wrong...!!"
+      })
+    }
+  } else {
+    console.log('10');
+    res.status(400).json({
+      message: "Something went wrong...!!"
+    })
+  }
+})
+
+app.post('/api/v2/compress', async (req, res) => {
+  if (req.files && req.files.images) {
+    if (!Array.isArray(req.files.images)) {
+      req.files.images = [req.files.images]
+    }
+    try {
+      const fpath = Date.now();
+      const dirPath = path.resolve(__dirname, `sources/${fpath}`);
+      const INPUT_path_to_your_images = `${dirPath}/**/*.{jpg,JPG,jpeg,JPEG,png,svg,gif}`;
+      const OUTPUT_path = path.resolve(__dirname, `outputs/${fpath}`) + '/';
+      fs.mkdirSync(dirPath);
+      fs.mkdirSync(OUTPUT_path);
+      for (const key in req.files.images) {
+        const file = req.files.images[key];
+        fs.writeFileSync(`${dirPath}/${file.name}`, file.data);
+      }
+      console.log('OUTPUT_path', OUTPUT_path);
+      compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: true, statistic: true, autoupdate: true }, false,
+        { jpg: { engine: "mozjpeg", command: ["-quality", "20"] } },
+        { png: { engine: "pngquant", command: ["--quality=20-30", "-o"] } },
+        // { png: { engine: "webp", command: ["-q", "20"] } },
+        { svg: { engine: "svgo", command: "--multipass" } },
+        { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
+        function (error, completed, statistic) {
+          console.log("-------------");
+          console.log(error);
+          console.log(completed);
+          console.log(statistic);
+          console.log("-------------");
+        }
+      );
       res.json({ url: `/imagify/api/download?name=${fpath}` });
       console.log('8');
     } catch (error) {
