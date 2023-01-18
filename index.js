@@ -102,7 +102,6 @@ app.post('/api/v2/compress', async (req, res) => {
       compress_images(INPUT_path_to_your_images, OUTPUT_path, { compress_force: true, statistic: true, autoupdate: true }, false,
         { jpg: { engine: "mozjpeg", command: ["-quality", "20"] } },
         { png: { engine: "pngquant", command: ["--quality=20-30", "-o"] } },
-        // { png: { engine: "webp", command: ["-q", "20"] } },
         { svg: { engine: "svgo", command: "--multipass" } },
         { gif: { engine: "gifsicle", command: ["--colors", "64", "--use-col=web"] } },
         function (error, completed, statistic) {
