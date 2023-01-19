@@ -88,6 +88,7 @@
 
 // Plugin initialize
 jQuery(document).ready(function ($) {
+  $('.background').hide();
   $(".demo1").kwtFileUpload();
   toastr.options = {
     "newestOnTop": false,
@@ -117,6 +118,7 @@ jQuery(document).ready(function ($) {
       }
     }
     $('#convert').attr('disabled', true);
+    $('.background').fadeIn(400)
     $.ajax({
       "url": "/imagify/api/compress",
       "method": "POST",
@@ -126,6 +128,7 @@ jQuery(document).ready(function ($) {
       "contentType": false,
       "data": formdata
     }).then(resp => {
+      $('.background').fadeOut(400)
       if (typeof resp === 'string') {
         resp = JSON.parse(resp);
       }
@@ -137,6 +140,7 @@ jQuery(document).ready(function ($) {
     }).catch(err => {
       console.log(err);
       $('#convert').removeAttr('disabled');
+      $('.background').fadeOut(400)
     })
   })
 });
