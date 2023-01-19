@@ -6,8 +6,9 @@ const { json } = require('body-parser');
 const fileUpload = require('express-fileupload');
 const zip = require('express-easy-zip');
 const tinify = require('tinify')
+require('dotenv').config();
 
-tinify.key = "3lcMG61blDG9mCTNhTQ88XTqNysHqRcw";
+tinify.key = process.env.TinyKey;
 const app = express();
 app.use(fileUpload({}));
 app.use(json());
