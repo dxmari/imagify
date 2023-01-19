@@ -39,7 +39,7 @@ app.post('/api/compress', async (req, res) => {
       }
       console.log('tinify.compressionCount', tinify.compressionCount);
       res.json({
-        url: `/api/download?name=${fpath}`
+        url: `/imagify/api/download?name=${fpath}`
       })
     } catch (error) {
       console.log('error', error);
